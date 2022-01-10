@@ -66,12 +66,28 @@ Example screenshots with information redacted are provided below
 
 ##### Grafana - 1
 
+> Click To Open Image
+
+<details>
+<summary>Dashboard Overview</summary>
+
 ![](grafana1.png)
+
+</details>
+
 
 
 ##### Grafana - 2
 
+> Click To Open Image
+
+<details>
+<summary>RPC Overview</summary>
+
 ![](grafana2.png)
+
+</details>
+
 
 
 ### Design goals
