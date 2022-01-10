@@ -1,3 +1,37 @@
+# Manifold Finance - OpenMEV Platform Overview
+
+---
+
+> Documentation for Integration Partners, Application Partners, End Users and Searchers
+
+> v2022.01.09
+
+## Table of Contents
+
+- [📚 Summary](#---summary)
+- [✅ Overview](#--overview)
+- [Comparison](#comparison)
+- [SushiRelay.com - OpenMEV for SushiSwap](#sushirelaycom---openmev-for-sushiswap)
+- [🧰 Specification](#---specification)
+  * [Dashboard](#dashboard)
+      - [Grafana - 1](#grafana---1)
+      - [Grafana - 2](#grafana---2)
+  * [Design goals](#design-goals)
+  * [Architecture Goals](#architecture-goals)
+    + [Redundant resources (trade cost)](#redundant-resources--trade-cost-)
+    + [Degraded results (trade quality)](#degraded-results--trade-quality-)
+    + [Retry transient failures (trade latency)](#retry-transient-failures--trade-latency-)
+- [Application State / Workflows](#application-state---workflows)
+  * [Handling Forks](#handling-forks)
+  * [Submitting Transactions](#submitting-transactions)
+  * [Submitting Bundles](#submitting-bundles)
+  * [Profit Distribution / Rebating](#profit-distribution---rebating)
+  * [📐 Technical Integration / SDK](#---technical-integration---sdk)
+    + [Protobuf Schemas](#protobuf-schemas)
+    + [Ethers.js Web3 Provider](#ethersjs-web3-provider)
+
+
+
 ## 📚 Summary
 
 > OpenMEV is a (permission-based) RPC network layer connected to MEV-enabled block producer pools. By having a private connection we can enable protocols and dapps a consistent protection against MEV (maximal extracted value). MEV is a category of transactions that include 'sandwich trades, front running, back running, arbitrage, etc'. Additional services can be built and offered, such as 'Pay for Order Flow', 'Account Abstraction (Buterin, EIP 4337), Carrier Transactions, etc. By privatizing user transaction flow we can enable the recapture of arbitrage/slippage back to the originating user trade.
