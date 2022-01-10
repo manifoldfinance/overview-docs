@@ -140,6 +140,37 @@ Below are select high level sequence diagrams of core workflow / logic of OpenME
 
 ### 📐 Technical Integration / SDK
 
+#### RPC
+
+##### HTTPS
+https://api.sushirelay.com/v1
+
+##### WebSocket
+
+```sh
+$ wscat -c wss://api.sushirelay.com/v1
+```
+```sh
+< {"method":"manifold_motd","jsonrpc":"2.0","params":{"result":{"notice":"THIS IS A NOTICE OF MONITORING OF MANIFOLD FINANCE, INC NETWORK INFORMATION SYSTEMS  By logging into Manifold Finance, Inc computer systems, you acknowledge and consent to monitoring of this system.  Network Policy <https://docs.manifoldfinance.com/network/policy>  By using this network, you certify that you have read, understand, and agree to abide by the Rules of Behavior for Manifold Finance Network Platform."}}}
+>
+```
+
+
+We provide:
+
+- nodejs sdk / npm package
+- Direct Websocket / authenticated endpoint
+- Kafka Broker / Site to Site connection 
+- Protobuf schema [see openmev/protobufs](https://github.com/manifoldfinance/openmev-sdk/tree/master/packages/protobufs/src)
+
+Additionally we provide for operations:
+
+- OAuth2 Auth / user management (GitHub)
+- OTEL Tracing 
+- Green/Blue deploys for testing 
+
+
+
 > Note, we are in the process of consolidating and moving to a new git repo
 > https://github.com/manifoldfinance/disco3-react
 
