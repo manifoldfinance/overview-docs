@@ -42,6 +42,8 @@
 
 [see docs.openmev.org/compare](https://docs.openmev.org/compare)
 
+> Note, we are in the process of overhauling our documentation process - please only refer to docs.openmev.org, docs.sushirelay.com or this repo
+
 ## SushiRelay.com - OpenMEV for SushiSwap
 
 [see the available RPC methods](https://docs.sushirelay.com)
