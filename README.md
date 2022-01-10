@@ -18,6 +18,52 @@
 
 ## 🧰 Specification
 
+> Engineering Goals and Specification
+
+OpenMEV is built ontop of our 'backbone platform'. Backbone is built on baremetal instances, with OVH, equinix bare metal, and hetzner as the main providers. Nix/Kotlin/Kubernetes/kdb+/redpanda are the primary tech stack components.
+
+### Dashboard
+
+A Grafana dashboard utilizing OAuth2 via GitHub is available for partners and integration users.
+
+Example screenshots with information redacted are provided below
+
+##### Grafana - 1
+
+![](grafana1.png)
+
+
+##### Grafana - 2
+
+![](grafana2.png)
+
+
+### Design goals
+
+- **Pre-trade privacy**
+Pre-trade privacy implies transactions only become publicly known after they have been included in a block. Note, this type of privacy does not exclude privileged actors such as transaction aggregators / gateways / miners.
+- **Failed trade privacy**
+Failed trade privacy implies loosing bids are never included in a block, thus never exposed to the public. Failed trade privacy is tightly coupled to extraction efficiency.
+- **Complete privacy**
+Complete privacy implies there are no privileged actors such as transaction aggregators / gateways / miners who can observe incoming transactions.
+- **Finality**
+Finality implies it is infeasible for MEV extraction to be reversed once included in a block. This would protect against time-bandit chain re-org attacks.
+
+### Architecture Goals
+
+#### Redundant resources (trade cost)
+Having redundant resources to avoid single points of failure.
+ Every component can fail, but the system is robust enough that an individual outage can be tolerated.
+
+#### Degraded results (trade quality)
+For some services, it might be acceptable to trade quality for reliability. 
+Instead of expecting every transaction to succeed, it can be tolerable for a business to see some requests fail.
+
+#### Retry transient failures (trade latency)
+If a response isn't returned in the expected time, the system sends the same request again.
+
+## Application State / Workflows
+
 Below are select high level sequence diagrams of core workflow / logic of OpenMEV's application bus
 
 ### Handling Forks
@@ -40,4 +86,22 @@ Below are select high level sequence diagrams of core workflow / logic of OpenME
 
 ![](profit_dist.svg)
 
-### 📐 Technical
+### 📐 Technical Integration / SDK
+
+> Note, we are in the process of consolidating and moving to a new git repo
+> https://github.com/manifoldfinance/disco3-react
+
+Disco3 will provide the same functionality as @openmev/sdk-connect but with 
+additional components / tooling for easier DApp integrations. It uses the same interfaces
+as web3-react, except provides modern implementations and solutions (better state management, strict dependency enforcement, etc)
+
+
+
+#### Protobuf Schemas
+
+https://github.com/manifoldfinance/openmev-sdk/tree/master/packages/protobufs/src
+
+#### Ethers.js Web3 Provider
+
+@openmev/sdk-connect
+https://github.com/manifoldfinance/openmev-sdk/tree/master/packages/sdk-connect
