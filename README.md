@@ -1,8 +1,11 @@
-# Manifold Finance - OpenMEV Platform Overview
+# Manifold Finance - Platform Overview
+
 
 ---
 
 > Documentation for Integration Partners, Application Partners, End Users and Searchers
+
+> OpenMEV / SecureRPC
 
 > v2022.01.09
 
