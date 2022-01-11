@@ -121,34 +121,74 @@ If a response isn't returned in the expected time, the system sends the same req
 
 Below are select high level sequence diagrams of core workflow / logic of OpenMEV's application bus
 
+
+> Click the Arrows to expand the workflow image
+
 ### Handling Forks
 
-![](handling_fork.svg)
-
+<details>
+<summary> Fork/Reorg Recovery </summary>
+ 
+ 
+<img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/handling_fork.svg"
+ 
+ </details>
+ 
+ 
 ### Submitting Transactions
 
-![](submit_tx.svg)
 
+<details>
+<summary> Rebate Engine </summary>
 
+ <img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/submit_tx.svg"
+     
+</details>
+
+ 
 ### Submitting Bundles
 
 > Note this does not include 'mega bundles' which are different
 
-![](submit_bundle.svg)
-
+<details>
+ <summary> Rebate Engine </summary>
+ 
+<img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/submit_bundle.svg"
+ 
+ </details>
 
 ### Profit Distribution / Rebating
 
-![](profit_dist.svg)
+<details>
+ <summary> Rebate Engine </summary>
+<img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/profit_dist.svg">
 
-### 📐 Technical Integration / SDK
+ </details>
+
+
+## 📐 Technical Integration / SDK
 
 #### RPC
 
 ##### HTTPS
 https://api.sushirelay.com/v1
+ 
 
-##### WebSocket
+### WebSocket
+
+
+#### Staging
+
+```
+wss://api-stag.sushirelay.com/v1
+```
+
+#### Production
+
+```
+wscat -c wss://api.sushirelay.com/v1
+```
+
 
 ```sh
 $ wscat -c wss://api.sushirelay.com/v1
