@@ -5,9 +5,11 @@
 
 > Documentation for Integration Partners, Application Partners, End Users and Searchers
 
-> OpenMEV / SecureRPC
+> [status page](https://status.manifoldfinance.com/)
 
-> v2022.01.09
+> v2022.01.11
+
+
 
 ## Table of Contents
 
