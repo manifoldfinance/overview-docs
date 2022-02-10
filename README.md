@@ -8,7 +8,7 @@
 > [status page](https://status.manifoldfinance.com/)
 
 > v2022.01.11
-
+> v2022.02.10
 
 
 ## Table of Contents
@@ -17,6 +17,17 @@
 - [✅ Overview](#--overview)
 - [Comparison](#comparison)
 - [SushiRelay.com - OpenMEV for SushiSwap](#sushirelaycom---openmev-for-sushiswap)
+  * [app.sushi.com](https://app.sushi.com)](#appsushicom--https---appsushicom-)
+- [📐 Sushi Relay API Reference](#---sushi-relay-api-reference)
+- [Response RPC Methods](#response-rpc-methods)
+- [Supported RPC](#supported-rpc)
+  * [OpenMEV](#openmev)
+    + [RPC Endpoints](#rpc-endpoints)
+      - [HTTPS](#https)
+  * [WebSocket](#websocket)
+    + [Staging](#staging)
+    + [Production](#production)
+    + [Example: Websocket usage](#example--websocket-usage)
 - [🧰 Specification](#---specification)
   * [Dashboard](#dashboard)
       - [Grafana - 1](#grafana---1)
@@ -26,15 +37,8 @@
     + [Redundant resources (trade cost)](#redundant-resources--trade-cost-)
     + [Degraded results (trade quality)](#degraded-results--trade-quality-)
     + [Retry transient failures (trade latency)](#retry-transient-failures--trade-latency-)
-- [Application State / Workflows](#application-state---workflows)
-  * [Handling Forks](#handling-forks)
-  * [Submitting Transactions](#submitting-transactions)
-  * [Submitting Bundles](#submitting-bundles)
-  * [Profit Distribution / Rebating](#profit-distribution---rebating)
-  * [📐 Technical Integration / SDK](#---technical-integration---sdk)
-    + [Protobuf Schemas](#protobuf-schemas)
-    + [Ethers.js Web3 Provider](#ethersjs-web3-provider)
-
+- [📐 Technical Integration / SDK](#---technical-integration---sdk)
+  * [New Features for SDK](#new-features-for-sdk)
 
 
 ## 📚 Summary
