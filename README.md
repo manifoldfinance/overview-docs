@@ -57,7 +57,100 @@
 
 [see the available RPC methods](https://docs.sushirelay.com)
 
-[integration branch on the sushiswap frontend](https://github.com/manifoldfinance/sushiswap-interface/tree/feat/openmev-relay)
+### app.sushi.com](https://app.sushi.com)
+
+OpenMEV/Sushi Relay is live on app.sushi.com - to see the frontend integration you can see this feature branch
+[ntegration branch on the sushiswap frontend](https://github.com/manifoldfinance/sushiswap-interface/tree/feat/openmev-relay)
+
+
+## 📐 Sushi Relay API Reference
+
+
+> v0.0.1 RPC and API Overview 
+
+
+## Response RPC Methods
+
+These are methods we support for which we return static responses to ensure compliance 
+ ```
+eth_chainId 
+eth_protocolVersion 
+eth_mining 
+eth_hashrate 
+eth_accounts 
+eth_syncing 
+eth_coinbase 
+net_listening 
+net_peerCount 
+net_version 
+web3_clientVersion 
+ ```
+ 
+## Supported RPC
+
+These are all methods we expose and proxy  to our internal eth clients 
+ ```
+eth_blockNumber 
+eth_call 
+eth_estimateGas 
+eth_gasPrice 
+eth_getBalance 
+eth_getBlockByHash 
+eth_getBlockByNumber 
+eth_getBlockTransactionCountByHash 
+eth_getBlockTransactionCountByNumber 
+eth_getCode 
+eth_getStorageAt 
+eth_getTransactionByBlockHashAndIndex 
+eth_getTransactionByBlockNumberAndIndex 
+eth_getTransactionByHash 
+eth_getTransactionCount 
+eth_getTransactionReceipt 
+eth_getUncleByBlockHashAndIndex 
+eth_getUncleByBlockNumberAndIndex 
+eth_getUncleCountByBlockHash 
+eth_getUncleCountByBlockNumber 
+eth_sign   
+eth_signTypedData   
+eth_sendRawTransaction   
+```
+ 
+### OpenMEV
+
+To send a transaction that you would want a rebate on, you use this custom rpc methods: 
+
+```
+manifold_sendTransaction   
+```
+
+#### RPC Endpoints
+
+##### HTTPS
+
+https://api.sushirelay.com/v1
+
+### WebSocket
+
+#### Staging
+```
+wss://api-stag.sushirelay.com/v1
+```
+#### Production
+
+```
+wss://api.sushirelay.com/v1
+```
+
+#### Example: Websocket usage
+
+```sh
+$ wscat -c wss://api.sushirelay.com/v1
+```
+```sh
+< {"method":"manifold_motd","jsonrpc":"2.0","params":{"result":{"notice":"THIS IS A NOTICE OF MONITORING OF MANIFOLD FINANCE, INC NETWORK INFORMATION SYSTEMS  By logging into Manifold Finance, Inc computer systems, you acknowledge and consent to monitoring of this system.  Network Policy <https://docs.manifoldfinance.com/network/policy>  By using this network, you certify that you have read, understand, and agree to abide by the Rules of Behavior for Manifold Finance Network Platform."}}}
+>
+```
+
 
 
 ## 🧰 Specification
@@ -97,7 +190,6 @@ Example screenshots with information redacted are provided below
 </details>
 
 
-
 ### Design goals
 
 - **Pre-trade privacy**
@@ -122,126 +214,20 @@ Instead of expecting every transaction to succeed, it can be tolerable for a bus
 #### Retry transient failures (trade latency)
 If a response isn't returned in the expected time, the system sends the same request again.
 
-## Application State / Workflows
-
-Below are select high level sequence diagrams of core workflow / logic of OpenMEV's application bus
-
-
-> Click the Arrows to expand the workflow image
-
-### Handling Forks
-
-<details>
-<summary> Fork/Reorg Recovery </summary>
- 
- 
-<img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/handling_fork.svg"
- 
- </details>
- 
- 
-### Submitting Transactions
-
-
-<details>
-<summary> Rebate Engine </summary>
-
- <img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/submit_tx.svg"
-     
-</details>
-
- 
-### Submitting Bundles
-
-> Note this does not include 'mega bundles' which are different
-
-<details>
- <summary> Rebate Engine </summary>
- 
-<img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/submit_bundle.svg"
- 
- </details>
-
-### Profit Distribution / Rebating
-
-<details>
- <summary> Rebate Engine </summary>
-<img src="https://raw.githubusercontent.com/manifoldfinance/overview-docs/master/profit_dist.svg">
-
- </details>
-
 
 ## 📐 Technical Integration / SDK
 
-#### RPC
+1. [OpenMEV Ethersjs Provider](https://github.com/manifoldfinance/openmev-provider)
 
-##### HTTPS
-https://api.sushirelay.com/v1
- 
+Expanding Integration to have a unstyled widget component and react hook. 
 
-### WebSocket
+### New Features for SDK
 
+- Populates back to user errors from all rpc endpoints
+- Populates back to user an exception if rejected for malformed/defects
+- Users can query the state of their transactions
+- Users can query their 'status': pending rebates, total rebates, 
 
-#### Staging
+- Path Optimization 
+- Aggreation layer optional
 
-```
-wss://api-stag.sushirelay.com/v1
-```
-
-#### Production
-
-```
-wscat -c wss://api.sushirelay.com/v1
-```
-
-
-```sh
-$ wscat -c wss://api.sushirelay.com/v1
-```
-```sh
-< {"method":"manifold_motd","jsonrpc":"2.0","params":{"result":{"notice":"THIS IS A NOTICE OF MONITORING OF MANIFOLD FINANCE, INC NETWORK INFORMATION SYSTEMS  By logging into Manifold Finance, Inc computer systems, you acknowledge and consent to monitoring of this system.  Network Policy <https://docs.manifoldfinance.com/network/policy>  By using this network, you certify that you have read, understand, and agree to abide by the Rules of Behavior for Manifold Finance Network Platform."}}}
->
-```
-
-
-We provide:
-
-- nodejs sdk / npm package
-- Direct Websocket / authenticated endpoint
-- Kafka Broker / Site to Site connection 
-- Protobuf schema [see openmev/protobufs](https://github.com/manifoldfinance/openmev-sdk/tree/master/packages/protobufs/src)
-
-Additionally we provide for operations:
-
-- OAuth2 Auth / user management (GitHub)
-- OTEL Tracing 
-- Green/Blue deploys for testing 
-
-
-
-> Note, we are in the process of consolidating and moving to a new git repo
-> https://github.com/manifoldfinance/disco3-react
-
-Disco3 will provide the same functionality as @openmev/sdk-connect but with 
-additional components / tooling for easier DApp integrations. It uses the same interfaces
-as web3-react, except provides modern implementations and solutions (better state management, strict dependency enforcement, etc)
-
-
-#### Protobuf Schemas
-
-https://github.com/manifoldfinance/openmev-sdk/tree/master/packages/protobufs/src
-
-#### Ethers.js Web3 Provider
-
-@openmev/sdk-connect
-https://github.com/manifoldfinance/openmev-sdk/tree/master/packages/sdk-connect
-
-## Roadmap
-
-- Carrier Transaction support
-- Account Abstraction Support (EIP 4337)
-- Real Time Protocol Monitoring and Alerts
-- Multichain support (Avalanche, Fantom, Polkadot - subjet to change)
-
-- **[Manifold Finance GitHub Project Board - Roadmap, issues, etc](https://github.com/orgs/manifoldfinance/projects/8) 
-> note: does not include private repo tracking for now!
